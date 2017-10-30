@@ -1,0 +1,37 @@
+#
+# Standard Gitignore File
+#
+
+# ignore VIM editor files
+.*.swp
+
+# ignore packaged files
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# ignore generic files
+*.bak
+temp.txt
+
+# ignore log files
+*.log
+
+# ignore Windows specific files
+Thumbs.db
+
+# ignore OS X specific files
+*.dmg
+.DS_Store
+
+# Ignore sass-cache files.
+*.sass-cache*
+
+# Ignore Sass source map files.
+*.css.map
+
