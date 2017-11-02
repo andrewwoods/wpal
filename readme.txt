@@ -1,4 +1,4 @@
-=== WP Auto Loader ===
+=== WP AutoLoader ===
 Contributors: awoods
 Tags: dev, developer, tool, tools, oop, object oriented programming, must use, mu-plugin
 Requires PHP: 5.5

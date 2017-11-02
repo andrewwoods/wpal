@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WP Auto Loader
+ * Plugin Name: WP AutoLoader
  * Plugin URI: http://wordpress.org/plugins/wpal
  * Description: A PHP Class Namespace auto loader to help modernize your code.
  * Author: awoods
