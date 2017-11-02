@@ -7,7 +7,7 @@
  * Author URI: http://andrewwoods.net
  * Text Domain: wpal
  * Domain Path: /languages
- * Version: 0.1.0
+ * Version: 0.2.0
  *
  * @package WPAL
  */
