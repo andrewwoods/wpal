@@ -68,7 +68,41 @@ class AutoloaderTest extends WP_UnitTestCase {
 		self::assertEquals( $dir . '/world/north-america/class-united-states.php', $result );
 	}
 
+	/**
+	 * Test the filename for a trait name.
+	 */
+	function test_check_as_interface() {
+		$autoload = new Autoloader();
 
+		$dir = '/var/www/lib';
+
+		$result = $autoload->check_as_interface( 'File', $dir );
+		self::assertEquals( $dir . '/interface-file.php', $result );
+
+		$result = $autoload->check_as_interface( 'Media\\Playable', $dir );
+		self::assertEquals( $dir . '/media/interface-playable.php', $result );
+
+		$result = $autoload->check_as_interface( 'World\\Data\\Phone_Number', $dir );
+		self::assertEquals( $dir . '/world/data/interface-phone-number.php', $result );
+	}
+
+	/**
+	 * Test the filename for a trait name.
+	 */
+	function test_check_as_trait() {
+		$autoload = new Autoloader();
+
+		$dir = '/var/www/lib';
+
+		$result = $autoload->check_as_trait( 'Open_Close', $dir );
+		self::assertEquals( $dir . '/trait-open-close.php', $result );
+
+		$result = $autoload->check_as_trait( 'Geography\\Latitude_Longitude', $dir );
+		self::assertEquals( $dir . '/geography/trait-latitude-longitude.php', $result );
+
+		$result = $autoload->check_as_trait( 'World\\Data\\Postal_Code_Validation', $dir );
+		self::assertEquals( $dir . '/world/data/trait-postal-code-validation.php', $result );
+	}
 	/**
 	 * Ensure illegal characters are removed appropriately.
 	 */

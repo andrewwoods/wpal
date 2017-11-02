@@ -40,6 +40,17 @@ class Autoloader {
 			return true;
 		}
 
+		// Add check for traits and interfaces here.
+		$file = $self->check_as_interface( $class_name, $class_directory );
+		if ( $self->include_if_exists( $file ) ) {
+			return true;
+		}
+
+		$file = $self->check_as_trait( $class_name, $class_directory );
+		if ( $self->include_if_exists( $file ) ) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -57,6 +68,44 @@ class Autoloader {
 		$data = $this->process_class_name( $class_name, $class_directory );
 
 		$filename = $this->make_filename_from_class( $data['class'] );
+
+		return $data['path'] . $filename;
+	}
+
+	/**
+	 * Attempt to autoload this as an interface
+	 *
+	 * WordPress doesn't have a rule for interface filenames in the WordPress Coding Standard.
+	 * However, for consistency with classes it's seems best to prefix filenames with 'interface-'.
+	 *
+	 * @param string $class_name The class/trait/interface the client developer wants to use.
+	 * @param string $class_directory the plugin directory where the user keeps their classes.
+	 *
+	 * @return string
+	 */
+	public function check_as_interface( $class_name, $class_directory ) {
+		$data = $this->process_class_name( $class_name, $class_directory );
+
+		$filename = $this->make_filename_from_interface( $data['class'] );
+
+		return $data['path'] . $filename;
+	}
+
+	/**
+	 * Attempt to autoload this as an trait
+	 *
+	 * WordPress doesn't have a rule for trait filenames in the WordPress Coding Standard.
+	 * However, for consistency with classes it's seems best to prefix filenames with 'trait-'.
+	 *
+	 * @param string $class_name The class/trait/interface the client developer wants to use.
+	 * @param string $class_directory the plugin directory where the user keeps their classes.
+	 *
+	 * @return string
+	 */
+	public function check_as_trait( $class_name, $class_directory ) {
+		$data = $this->process_class_name( $class_name, $class_directory );
+
+		$filename = $this->make_filename_from_trait( $data['class'] );
 
 		return $data['path'] . $filename;
 	}
@@ -121,6 +170,32 @@ class Autoloader {
 		$slug = $this->sanitize_path( $class );
 
 		return 'class-' . $slug . '.php';
+	}
+
+	/**
+	 * Create a filename based on a interface name
+	 *
+	 * @param string $interface the WordPress class.
+	 *
+	 * @return string
+	 */
+	public function make_filename_from_interface( $interface ) {
+		$slug = $this->sanitize_path( $interface );
+
+		return 'interface-' . $slug . '.php';
+	}
+
+	/**
+	 * Create a filename based on a interface name
+	 *
+	 * @param string $trait the WordPress class.
+	 *
+	 * @return string
+	 */
+	public function make_filename_from_trait( $trait ) {
+		$slug = $this->sanitize_path( $trait );
+
+		return 'trait-' . $slug . '.php';
 	}
 
 	/**
